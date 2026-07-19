@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Calendar, Award, ChevronLeft, ChevronRight, ArrowRight, CheckCircle2, MapPin } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
+// Import local clinical background asset
+import clinicHeroPath from '../assets/images/clinic_hero_1782883016455.jpg';
+
 interface HeroProps {
   onBookClick: () => void;
 }
@@ -13,7 +16,7 @@ export default function Hero({ onBookClick }: HeroProps) {
     {
       condition: 'Acne & Acne Scars',
       description: 'Consultation & targeted medical therapy for clearing stubborn acne, blackheads, and reducing post-acne scarring.',
-      bgImage: 'https://images.unsplash.com/photo-1608248597481-496100c8c836?auto=format&fit=crop&q=80&w=1200',
+      bgImage: clinicHeroPath,
       frontImage: 'https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&q=80&w=800'
     },
     {
@@ -74,85 +77,89 @@ export default function Hero({ onBookClick }: HeroProps) {
       </div>
 
       {/* 2. Interactive Hero Content Area */}
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pt-32 pb-24 min-h-[90vh]">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-20 xl:px-24 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pt-24 pb-16 sm:pt-28 sm:pb-20 lg:pt-36 lg:pb-28 min-h-[90vh]">
         
         {/* Left Side Content Card (opaque white for pristine readability) */}
-        <div className="lg:col-span-7 xl:col-span-8 flex justify-start">
-          <div className="bg-white/95 backdrop-blur-md border border-white/85 shadow-2xl rounded-3xl p-6 sm:p-10 lg:p-12 max-w-2xl w-full">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={`content-${currentIndex}`}
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -15 }}
-                transition={{ duration: 0.4, ease: "easeOut" }}
+        <div className="lg:col-span-7 flex justify-center lg:justify-start">
+          <div className="bg-white/95 backdrop-blur-md border border-white/85 shadow-2xl rounded-3xl p-6 sm:p-10 lg:p-12 max-w-2xl w-full flex flex-col">
+            {/* Premium Badge - Static & always visible */}
+            <div className="hidden sm:inline-flex self-start items-center gap-1.5 bg-[#8c1d5c]/10 text-[#8c1d5c] px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest mb-6">
+              <Award className="w-4 h-4 shrink-0" />
+              <span>Premium Dermatology</span>
+            </div>
+
+            {/* Animating Text Area with a stable min-height to prevent layout/height shift */}
+            <div className="min-h-[160px] sm:min-h-[180px] lg:min-h-[150px] flex flex-col justify-center relative overflow-hidden mb-6">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={`text-${currentIndex}`}
+                  initial={{ opacity: 0, x: 15 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -15 }}
+                  transition={{ duration: 0.35, ease: "easeInOut" }}
+                  className="w-full"
+                >
+                  {/* Main Slide Title */}
+                  <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-gray-900 leading-[1.2] mb-4 font-bold">
+                    {HERO_SLIDES[currentIndex].condition}
+                  </h1>
+
+                  {/* Description Text */}
+                  <p className="text-sm sm:text-base text-gray-600 leading-relaxed font-sans">
+                    {HERO_SLIDES[currentIndex].description}
+                  </p>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+            {/* Sub-specializations Bullets - Static & always visible */}
+            <ul className="flex flex-wrap gap-4 sm:gap-6 mb-8">
+              <li className="flex items-center text-gray-700 text-xs sm:text-sm font-semibold">
+                <CheckCircle2 className="w-4 h-4 text-[#8c1d5c] mr-2 shrink-0" /> Symptoms
+              </li>
+              <li className="flex items-center text-gray-700 text-xs sm:text-sm font-semibold">
+                <CheckCircle2 className="w-4 h-4 text-[#8c1d5c] mr-2 shrink-0" /> Causes
+              </li>
+              <li className="flex items-center text-gray-700 text-xs sm:text-sm font-semibold">
+                <CheckCircle2 className="w-4 h-4 text-[#8c1d5c] mr-2 shrink-0" /> Treatments
+              </li>
+            </ul>
+
+            {/* Visual CTAs - Static & always visible */}
+            <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-4">
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  onBookClick();
+                }}
+                className="h-[52px] flex items-center justify-center gap-2 bg-[#8c1d5c] hover:bg-[#73164b] text-white px-6 sm:px-8 rounded-full font-semibold text-sm shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 whitespace-nowrap cursor-pointer"
               >
-                {/* Premium Badge - Automatically hidden on mobile screen sizes */}
-                <div className="hidden sm:inline-flex items-center gap-1.5 bg-[#8c1d5c]/10 text-[#8c1d5c] px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest mb-6">
-                  <Award className="w-4 h-4 shrink-0" />
-                  <span>Premium Dermatology</span>
-                </div>
-
-                {/* Main Slide Title */}
-                <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-gray-900 leading-[1.2] mb-5 font-bold">
-                  {HERO_SLIDES[currentIndex].condition}
-                </h1>
-
-                {/* Description Text */}
-                <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-6 font-sans">
-                  {HERO_SLIDES[currentIndex].description}
-                </p>
-
-                {/* Sub-specializations Bullets */}
-                <ul className="flex flex-wrap gap-4 sm:gap-6 mb-8">
-                  <li className="flex items-center text-gray-700 text-xs sm:text-sm font-semibold">
-                    <CheckCircle2 className="w-4 h-4 text-[#8c1d5c] mr-2 shrink-0" /> Symptoms
-                  </li>
-                  <li className="flex items-center text-gray-700 text-xs sm:text-sm font-semibold">
-                    <CheckCircle2 className="w-4 h-4 text-[#8c1d5c] mr-2 shrink-0" /> Causes
-                  </li>
-                  <li className="flex items-center text-gray-700 text-xs sm:text-sm font-semibold">
-                    <CheckCircle2 className="w-4 h-4 text-[#8c1d5c] mr-2 shrink-0" /> Treatments
-                  </li>
-                </ul>
-
-                {/* Visual CTAs */}
-                <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-4">
-                  <button
-                    onClick={(e) => {
-                      e.preventDefault();
-                      onBookClick();
-                    }}
-                    className="h-[52px] flex items-center justify-center gap-2 bg-[#8c1d5c] hover:bg-[#73164b] text-white px-6 sm:px-8 rounded-full font-semibold text-sm shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 whitespace-nowrap cursor-pointer"
-                  >
-                    <Calendar className="w-4 h-4 shrink-0" />
-                    <span>Book Consultation</span>
-                  </button>
-                  <button
-                    onClick={scrollToLocation}
-                    className="h-[52px] flex items-center justify-center gap-2 bg-[#8c1d5c]/5 hover:bg-[#8c1d5c]/10 text-[#8c1d5c] border border-[#8c1d5c]/15 px-6 sm:px-8 rounded-full font-semibold text-sm hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 whitespace-nowrap cursor-pointer"
-                  >
-                    <MapPin className="w-4 h-4 shrink-0" />
-                    <span>Our Location</span>
-                  </button>
-                  <button
-                    onClick={(e) => {
-                      e.preventDefault();
-                      document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
-                    }}
-                    className="h-[52px] flex items-center justify-center gap-2 text-gray-700 hover:text-[#8c1d5c] bg-white border border-gray-200 hover:border-[#8c1d5c]/30 px-6 sm:px-8 rounded-full font-semibold text-sm shadow-sm hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 whitespace-nowrap cursor-pointer"
-                  >
-                    <span>Learn More</span>
-                    <ArrowRight className="w-4 h-4 text-[#8c1d5c] shrink-0" />
-                  </button>
-                </div>
-              </motion.div>
-            </AnimatePresence>
+                <Calendar className="w-4 h-4 shrink-0" />
+                <span>Book Consultation</span>
+              </button>
+              <button
+                onClick={scrollToLocation}
+                className="h-[52px] flex items-center justify-center gap-2 bg-[#8c1d5c]/5 hover:bg-[#8c1d5c]/10 text-[#8c1d5c] border border-[#8c1d5c]/15 px-6 sm:px-8 rounded-full font-semibold text-sm hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 whitespace-nowrap cursor-pointer"
+              >
+                <MapPin className="w-4 h-4 shrink-0" />
+                <span>Our Location</span>
+              </button>
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="h-[52px] flex items-center justify-center gap-2 text-gray-700 hover:text-[#8c1d5c] bg-white border border-gray-200 hover:border-[#8c1d5c]/30 px-6 sm:px-8 rounded-full font-semibold text-sm shadow-sm hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 whitespace-nowrap cursor-pointer"
+              >
+                <span>Learn More</span>
+                <ArrowRight className="w-4 h-4 text-[#8c1d5c] shrink-0" />
+              </button>
+            </div>
           </div>
         </div>
 
         {/* Right Side Main Floating Image Display */}
-        <div className="lg:col-span-5 xl:col-span-4 flex justify-center lg:justify-end">
+        <div className="lg:col-span-5 flex justify-center lg:justify-end">
           <div className="relative w-full max-w-sm sm:max-w-md">
             {/* Front Image container with shadow & sleek border */}
             <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl border border-white/30 bg-slate-100">
@@ -194,14 +201,14 @@ export default function Hero({ onBookClick }: HeroProps) {
       {/* 3. Sleek Absolute Arrows on Left & Right Borders of the Hero Section */}
       <button
         onClick={handlePrev}
-        className="absolute left-3 sm:left-6 lg:left-8 top-1/2 -translate-y-1/2 z-30 w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-gray-100 bg-white/95 backdrop-blur-md flex items-center justify-center text-gray-600 hover:text-[#8c1d5c] hover:border-[#8c1d5c]/30 hover:shadow-xl transition-all shadow-md cursor-pointer group"
+        className="hidden lg:flex absolute lg:left-8 top-1/2 -translate-y-1/2 z-30 w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-gray-100 bg-white/95 backdrop-blur-md items-center justify-center text-gray-600 hover:text-[#8c1d5c] hover:border-[#8c1d5c]/30 hover:shadow-xl transition-all shadow-md cursor-pointer group"
         aria-label="Previous treatment"
       >
         <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 transition-transform group-hover:-translate-x-0.5" />
       </button>
       <button
         onClick={handleNext}
-        className="absolute right-3 sm:right-6 lg:right-8 top-1/2 -translate-y-1/2 z-30 w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-gray-100 bg-white/95 backdrop-blur-md flex items-center justify-center text-gray-600 hover:text-[#8c1d5c] hover:border-[#8c1d5c]/30 hover:shadow-xl transition-all shadow-md cursor-pointer group"
+        className="hidden lg:flex absolute lg:right-8 top-1/2 -translate-y-1/2 z-30 w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-gray-100 bg-white/95 backdrop-blur-md items-center justify-center text-gray-600 hover:text-[#8c1d5c] hover:border-[#8c1d5c]/30 hover:shadow-xl transition-all shadow-md cursor-pointer group"
         aria-label="Next treatment"
       >
         <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 transition-transform group-hover:translate-x-0.5" />
