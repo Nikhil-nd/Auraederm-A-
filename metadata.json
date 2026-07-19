@@ -1,0 +1,8 @@
+{
+  "name": "Remix: Remix: Remix: Auraederm Skin Solutions",
+  "description": "Official website of Dr. Aishwarya Devaraj - Clinical \u0026 Aesthetic Dermatologist. Expert care for healthy skin, hair and scalp treatments, and cosmetic solutions.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
