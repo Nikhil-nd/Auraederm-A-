@@ -12,43 +12,86 @@ export interface AppointmentData {
 
 /**
  * Sends appointment request emails using EmailJS.
- * This service layer can easily be swapped out for a real backend API (e.g., fetch('/api/book')) in the future.
+ * This service layer can easily be replaced with a backend API in the future.
  */
-export const sendAppointmentRequest = async (data: AppointmentData): Promise<void> => {
-  const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-  const CLINIC_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_CLINIC_TEMPLATE_ID;
-  const PATIENT_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_PATIENT_TEMPLATE_ID;
-  const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+export const sendAppointmentRequest = async (
+  data: AppointmentData
+): Promise<void> => {
+  const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID?.trim();
+  const CLINIC_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_CLINIC_TEMPLATE_ID?.trim();
+  const PATIENT_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_PATIENT_TEMPLATE_ID?.trim();
+  const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY?.trim();
 
-  if (!SERVICE_ID || !CLINIC_TEMPLATE_ID || !PATIENT_TEMPLATE_ID || !PUBLIC_KEY) {
-    console.warn(
-      'EmailJS environment variables are missing. Please configure them in your environment settings.',
-      'Simulating successful email request...'
+  const isInvalid = (val?: string) => {
+    if (!val) return true;
+    const lower = val.toLowerCase();
+    return (
+      lower === "undefined" ||
+      lower === "null" ||
+      val.includes("YOUR_") ||
+      val.startsWith("{") ||
+      val.startsWith("<") ||
+      val === "test" ||
+      val === "dummy"
     );
-    // Simulate a network delay
+  };
+
+  if (
+    isInvalid(SERVICE_ID) ||
+    isInvalid(CLINIC_TEMPLATE_ID) ||
+    isInvalid(PATIENT_TEMPLATE_ID) ||
+    isInvalid(PUBLIC_KEY)
+  ) {
+    console.warn(
+      "EmailJS environment variables are missing or invalid.",
+      "Simulating successful request..."
+    );
+
     return new Promise((resolve) => setTimeout(resolve, 1500));
   }
 
-  // Parameters matching the EmailJS template variables
+  // These names MUST exactly match your EmailJS template variables
   const templateParams = {
     patient_name: data.name,
-    patient_email: data.email,
-    patient_phone: data.phone,
-    service_requested: data.service,
-    preferred_date: data.date,
-    preferred_time: data.time,
-    message: data.message,
-    clinic_email: 'itachiuchiha02054@gmail.com', // As requested
+    email: data.email,
+    phone: data.phone,
+    service: data.service,
+    appointment_date: data.date,
+    appointment_time: data.time,
+    skin_concern: data.message,
+
+    // Used by clinic template if you use {{clinic_email}}
+    clinic_email: "itachiuchiha02054@gmail.com",
   };
 
   try {
-    // 1. Send the notification email to the Clinic
-    await emailjs.send(SERVICE_ID, CLINIC_TEMPLATE_ID, templateParams, PUBLIC_KEY);
-    
-    // 2. Send the acknowledgment email to the Patient
-    await emailjs.send(SERVICE_ID, PATIENT_TEMPLATE_ID, templateParams, PUBLIC_KEY);
-  } catch (error) {
-    console.error('Failed to send appointment request via EmailJS:', error);
-    throw new Error('Failed to send appointment request. Please try again later.');
+    // Send appointment request to clinic
+    await emailjs.send(
+      SERVICE_ID!,
+      CLINIC_TEMPLATE_ID!,
+      templateParams,
+      PUBLIC_KEY!
+    );
+
+    // Send confirmation email to patient
+    await emailjs.send(
+      SERVICE_ID!,
+      PATIENT_TEMPLATE_ID!,
+      templateParams,
+      PUBLIC_KEY!
+    );
+  } catch (error: any) {
+    console.error("EmailJS Error:", error);
+
+    const details =
+      error?.text ||
+      error?.message ||
+      (typeof error === "object"
+        ? JSON.stringify(error)
+        : String(error));
+
+    throw new Error(
+      `EmailJS Error: ${details}`
+    );
   }
 };
