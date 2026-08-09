@@ -39,7 +39,14 @@ export default function Footer() {
             <div className="space-y-3">
               <div className="flex items-start gap-3 text-xs text-slate-400 font-sans">
                 <MapPin className="w-4 h-4 text-[#8c1d5c] flex-shrink-0 mt-0.5" />
-                <span>{CLINIC_INFO.address}</span>
+                <a
+                  href={CLINIC_INFO.googleMapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors"
+                >
+                  {CLINIC_INFO.address}
+                </a>
               </div>
               <div className="flex items-center gap-3 text-xs text-slate-400 font-sans">
                 <Phone className="w-4 h-4 text-[#8c1d5c] flex-shrink-0" />
@@ -59,7 +66,6 @@ export default function Footer() {
               <a href="#home" className="hover:text-white transition-colors">Home</a>
               <a href="#about" className="hover:text-white transition-colors">About Dr. Aishwarya</a>
               <a href="#services" className="hover:text-white transition-colors">Treatments</a>
-              <a href="#results" className="hover:text-white transition-colors">Results</a>
               <a href="#community" className="hover:text-white transition-colors">Outreach</a>
               <a href="#contact" className="hover:text-white transition-colors">Contact</a>
             </div>

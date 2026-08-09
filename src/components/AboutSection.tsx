@@ -39,17 +39,17 @@ export default function AboutSection({ doctorPortraitPath }: AboutSectionProps) 
           
           {/* Column 1: Image & Highlight Stats (5 cols) */}
           <div className="lg:col-span-5 flex flex-col items-center">
-            <div className="relative w-full max-w-sm aspect-square rounded-3xl overflow-hidden shadow-xl border-4 border-slate-50">
+            <div className="relative w-full max-w-sm aspect-square rounded-3xl overflow-hidden shadow-xl border-4 border-slate-50 bg-slate-100 flex items-center justify-center">
               <img
                 src={doctorPortraitPath}
                 alt="Dr. Aishwarya Devaraj Portrait"
                 referrerPolicy="no-referrer"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none"></div>
               <div className="absolute bottom-5 left-5 right-5 text-white">
-                <p className="font-serif text-xl font-bold">Dr. Aishwarya Devaraj</p>
-                <p className="text-xs text-rose-200 uppercase tracking-wide font-medium">MBBS, MD, FRGUHS</p>
+                <p className="font-serif text-xl font-bold drop-shadow">Dr. Aishwarya Devaraj</p>
+                <p className="text-xs text-rose-200 uppercase tracking-wide font-medium drop-shadow">MBBS, MD, FRGUHS</p>
               </div>
             </div>
 
@@ -114,7 +114,14 @@ export default function AboutSection({ doctorPortraitPath }: AboutSectionProps) 
                 </div>
                 <div className="mt-5">
                   <h4 className="font-semibold text-sm text-gray-800 uppercase tracking-wide mb-1">Clinic Base</h4>
-                  <p className="text-xs text-gray-500 font-sans">Sector 23 Market, Gurugram, Haryana</p>
+                  <a
+                    href={CLINIC_INFO.googleMapsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs text-[#8c1d5c] hover:underline font-medium font-sans inline-flex items-center gap-1"
+                  >
+                    <span>Sector 23 Market, Gurugram, Haryana</span>
+                  </a>
                 </div>
               </div>
             </div>

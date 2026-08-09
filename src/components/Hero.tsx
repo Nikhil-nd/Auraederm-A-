@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Calendar, Award, ChevronLeft, ChevronRight, ArrowRight, CheckCircle2, MapPin } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
-// Import local clinical background asset
+// Import local clinical background & skincare treatment assets
 import clinicHeroPath from '../assets/images/clinic_hero_1782883016455.jpg';
+import skincareTreatmentPath from '../assets/images/skincare_treatment_1782883034252.jpg';
 
 interface HeroProps {
   onBookClick: () => void;
@@ -22,8 +23,8 @@ export default function Hero({ onBookClick }: HeroProps) {
     {
       condition: 'Aesthetic Skin Rejuvenation',
       description: 'Advanced medical facials, customized chemical peels, and laser toning to restore your natural glow and even out pigmentation.',
-      bgImage: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&q=80&w=1200',
-      frontImage: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&q=80&w=800'
+      bgImage: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=1200',
+      frontImage: skincareTreatmentPath
     },
     {
       condition: 'Hair Density & Scalp Therapy',
@@ -51,9 +52,14 @@ export default function Hero({ onBookClick }: HeroProps) {
 
   const scrollToLocation = (e: React.MouseEvent) => {
     e.preventDefault();
-    const contactSection = document.getElementById('contact');
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
+    const locationElement = document.getElementById('clinic-map');
+    if (locationElement) {
+      locationElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } else {
+      const contactSection = document.getElementById('contact');
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     }
   };
 

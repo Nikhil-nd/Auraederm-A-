@@ -61,7 +61,7 @@ export const sendAppointmentRequest = async (
     skin_concern: data.message,
 
     // Used by clinic template if you use {{clinic_email}}
-    clinic_email: "itachiuchiha02054@gmail.com",
+    clinic_email: "Auraederm@gmail.com",
   };
 
   try {

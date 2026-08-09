@@ -38,9 +38,9 @@ export default function Navbar({ onBookClick }: NavbarProps) {
 
   const handleLocationClick = () => {
     setIsMenuOpen(false);
-    const element = document.getElementById('contact');
+    const element = document.getElementById('clinic-map') || document.getElementById('contact');
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      element.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   };
 

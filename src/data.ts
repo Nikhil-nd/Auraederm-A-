@@ -6,10 +6,11 @@ export const CLINIC_INFO = {
   "title": "Clinical & Aesthetic Dermatologist",
   "tagline": "Expert Care for Healthy, Radiant Skin",
   "phone": "+91 9740392626",
-  "email": "aishwaryadevraj.adha@gmail.com",
+  "email": "Auraederm@gmail.com",
   "instagram": "aishwarya_raj26",
   "address": "Auraederm Skin Solutions, Sector 23, Gurugram, Haryana, India",
-  "googleMapsMockUrl": "https://maps.google.com/maps?q=28.5113708,77.0480877&hl=en&z=18&output=embed",
+  "googleMapsUrl": "https://maps.app.goo.gl/8pJ6TC1eEqPQPk22A",
+  "googleMapsMockUrl": "https://maps.google.com/maps?q=Auraederm+Skin+Solutions+Sector+23+Gurugram&output=embed",
   "timings": [
     {
       "days": "Monday - Saturday",

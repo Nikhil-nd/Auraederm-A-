@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { MapPin, Phone, Mail, Instagram, Clock, Send, CheckCircle2, AlertCircle } from 'lucide-react';
+import { MapPin, Phone, Mail, Instagram, Clock, Send, CheckCircle2, AlertCircle, ExternalLink } from 'lucide-react';
 import { CLINIC_INFO, SERVICES } from '../data';
 
 import { sendAppointmentRequest } from '../services/emailService';
@@ -172,6 +172,15 @@ export default function ContactSection({ preselectedService = null, setPreselect
                   <div>
                     <h4 className="text-xs font-bold text-gray-400 uppercase tracking-wider font-sans">Clinic Address</h4>
                     <p className="text-sm text-gray-700 font-medium mt-1 font-sans">{CLINIC_INFO.address}</p>
+                    <a
+                      href={CLINIC_INFO.googleMapsUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-xs text-[#8c1d5c] font-semibold hover:underline mt-2 group"
+                    >
+                      <span>Open in Google Maps / Directions</span>
+                      <ExternalLink className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
+                    </a>
                   </div>
                 </div>
 
@@ -460,7 +469,7 @@ export default function ContactSection({ preselectedService = null, setPreselect
             </div>
 
             {/* Google Maps Frame */}
-            <div id="clinic-map" className="bg-white rounded-3xl border border-gray-100 overflow-hidden shadow-sm aspect-video sm:aspect-auto sm:h-56 relative border-4 border-white scroll-mt-28">
+            <div id="clinic-map" className="bg-white rounded-3xl border border-gray-100 overflow-hidden shadow-sm aspect-video sm:aspect-auto sm:h-64 relative border-4 border-white scroll-mt-28 group">
               <iframe
                 title="Auraederm Skin Solutions Location Map"
                 src={CLINIC_INFO.googleMapsMockUrl}
@@ -472,6 +481,16 @@ export default function ContactSection({ preselectedService = null, setPreselect
                 referrerPolicy="no-referrer-when-downgrade"
                 className="w-full h-full"
               ></iframe>
+              <a
+                href={CLINIC_INFO.googleMapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute top-3 right-3 bg-white/95 hover:bg-white text-gray-900 border border-gray-200 px-3 py-1.5 rounded-full text-xs font-semibold shadow-md hover:shadow-lg transition-all flex items-center gap-1.5 hover:scale-105"
+              >
+                <MapPin className="w-3.5 h-3.5 text-[#8c1d5c]" />
+                <span>Open in Google Maps</span>
+                <ExternalLink className="w-3 h-3 text-gray-400" />
+              </a>
             </div>
 
           </div>

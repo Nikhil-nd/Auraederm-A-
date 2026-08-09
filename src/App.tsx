@@ -10,7 +10,7 @@ import { Phone } from 'lucide-react';
 import { CLINIC_INFO } from './data';
 
 // Import image assets directly so Vite compiles and resolves their correct public paths in preview and production
-import doctorPortraitPath from './assets/images/doctor_portrait_1782883002577.jpg';
+import doctorPortraitPath from './assets/images/regenerated_image_1786204238051.png';
 import skincareTreatmentPath from './assets/images/skincare_treatment_1782883034252.jpg';
 
 const DOCTOR_PORTRAIT_PATH = doctorPortraitPath;
