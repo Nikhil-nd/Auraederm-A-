@@ -49,6 +49,41 @@ export default function ContactSection({ preselectedService = null, setPreselect
     }
   }, [preselectedService]);
 
+  const availableSlots = React.useMemo(() => {
+    if (!preferredDate) return [];
+    
+    const [year, month, day] = preferredDate.split('-');
+    const date = new Date(Number(year), Number(month) - 1, Number(day));
+    const dayOfWeek = date.getDay(); 
+
+    if (dayOfWeek === 0) return []; // Sunday
+
+    const standardSlots = [
+      '10:15 AM - 10:45 AM',
+      '1:00 PM - 1:30 PM',
+      '1:30 PM - 2:00 PM',
+      '4:15 PM - 4:45 PM'
+    ];
+
+    // Monday (1), Wednesday (3), Friday (5)
+    if (dayOfWeek === 1 || dayOfWeek === 3 || dayOfWeek === 5) {
+      return [
+        ...standardSlots,
+        '5:00 PM - 5:30 PM',
+        '5:30 PM - 6:00 PM',
+        '6:00 PM - 6:30 PM'
+      ];
+    }
+
+    return standardSlots;
+  }, [preferredDate]);
+
+  useEffect(() => {
+    if (preferredTime && !availableSlots.includes(preferredTime)) {
+      setPreferredTime('');
+    }
+  }, [availableSlots, preferredTime]);
+
   const validateForm = () => {
     const tempErrors: typeof errors = {};
     let isValid = true;
@@ -416,11 +451,20 @@ export default function ContactSection({ preselectedService = null, setPreselect
                         value={preferredTime}
                         onChange={(e) => setPreferredTime(e.target.value)}
                         className="w-full bg-slate-50/50 border border-gray-150 focus:border-[#8c1d5c] focus:bg-white text-xs px-4 py-3 rounded-xl focus:outline-none transition-all font-sans"
+                        disabled={!preferredDate || (preferredDate && availableSlots.length === 0)}
                       >
-                        <option value="">Select a general slot</option>
-                        <option value="Morning (10:00 AM - 01:00 PM)">Morning (10:00 AM - 01:00 PM)</option>
-                        <option value="Afternoon (01:00 PM - 04:00 PM)">Afternoon (01:00 PM - 04:00 PM)</option>
-                        <option value="Evening (04:00 PM - 07:00 PM)">Evening (04:00 PM - 07:00 PM)</option>
+                        {!preferredDate ? (
+                          <option value="">Select a date first</option>
+                        ) : availableSlots.length === 0 ? (
+                          <option value="">No appointments are available on Sunday. Please select another date.</option>
+                        ) : (
+                          <>
+                            <option value="">Select a 30-minute slot</option>
+                            {availableSlots.map(slot => (
+                              <option key={slot} value={slot}>{slot}</option>
+                            ))}
+                          </>
+                        )}
                       </select>
                     </div>
                   </div>

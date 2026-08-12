@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Calendar, Award, ChevronLeft, ChevronRight, ArrowRight, CheckCircle2, MapPin } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-
+import hairScalpImage from '../assets/images/regenerated_image_1786512370228.png';
 // Import local clinical background & skincare treatment assets
 import clinicHeroPath from '../assets/images/clinic_hero_1782883016455.jpg';
 import skincareTreatmentPath from '../assets/images/skincare_treatment_1782883034252.jpg';
+import aurabg1 from '../assets/images/WhatsApp Image 2026-08-12 at 11.20.29 AM.jpeg';
+import aurabg2 from '../assets/images/aurabg2.jpeg';
 
 interface HeroProps {
   onBookClick: () => void;
@@ -28,9 +30,21 @@ export default function Hero({ onBookClick }: HeroProps) {
     },
     {
       condition: 'Hair Density & Scalp Therapy',
-      description: 'Scientifically backed therapies including growth factor micro-infusions and clinical treatments to address thinning hair and hair loss.',
-      bgImage: 'https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&q=80&w=1200',
-      frontImage: 'https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&q=80&w=800'
+      description: 'Scientifically backed therapies including growth factor micro-infusions and PRP scalp treatments to address thinning hair and hair loss.',
+      bgImage: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=1200',
+      frontImage: hairScalpImage
+    },
+    {
+      condition: 'Pediatric & Geriatric Skin Care',
+      description: 'Gentle, evidence-based dermatological care for delicate infant & child skin conditions as well as specialized age-related skin disorders in seniors.',
+      bgImage: aurabg1,
+      frontImage: 'https://images.unsplash.com/photo-1581056771107-24ca5f033842?auto=format&fit=crop&q=80&w=800'
+    },
+    {
+      condition: 'Pregnancy-Induced Dermatoses',
+      description: 'Safe, specialized care for maternal skin changes during pregnancy and postpartum, including PUPPP, gestational rashes, and melasma.',
+      bgImage: aurabg2,
+      frontImage: 'https://images.unsplash.com/photo-1544126592-807ade215a0b?auto=format&fit=crop&q=80&w=800'
     }
   ];
 
