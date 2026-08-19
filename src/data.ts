@@ -5,10 +5,10 @@ export const CLINIC_INFO = {
   "doctorName": "Dr. Aishwarya Devaraj",
   "title": "Clinical & Aesthetic Dermatologist",
   "tagline": "Expert Care for Healthy, Radiant Skin",
-  "phone": "+91 9740392626",
+  "phone": "+91 8595333794",
   "email": "Auraederm@gmail.com",
   "instagram": "aishwarya_raj26",
-  "address": "Auraederm Skin Solutions, Sector 23, Gurugram, Haryana, India",
+  "address": "2nd floor, HQ Manik, C4, Opposite to HUDA market, Sector 23, Gurugram, Haryana 122017",
   "googleMapsUrl": "https://maps.app.goo.gl/8pJ6TC1eEqPQPk22A",
   "googleMapsMockUrl": "https://maps.google.com/maps?q=Auraederm+Skin+Solutions+Sector+23+Gurugram&output=embed",
   "timings": [
@@ -234,30 +234,7 @@ export const SERVICES: ServiceDetail[] = [
     ],
     "duration": "30 mins"
   },
-  {
-    "id": "hyperhidrosis-treatment",
-    "name": "Hyperhidrosis (Excessive Sweating) Treatment",
-    "category": "clinical",
-    "description": "Effective medical solutions to manage severe, uncontrolled sweating.",
-    "longDescription": "Targeted treatments for excessive sweating (hyperhidrosis) affecting the underarms, palms, or soles. We provide advanced medical solutions to reduce sweating and improve your daily comfort and confidence.",
-    "benefits": [
-      "Significant reduction in excessive sweating",
-      "Improved comfort and confidence",
-      "Management of body odor",
-      "Long-lasting relief from symptoms"
-    ],
-    "faqs": [
-      {
-        "question": "What treatments are available for hyperhidrosis?",
-        "answer": "Treatments range from prescription antiperspirants to botulinum toxin injections, depending on severity."
-      },
-      {
-        "question": "Are the results permanent?",
-        "answer": "Treatments like injections provide temporary relief (usually several months) and can be repeated as needed."
-      }
-    ],
-    "duration": "30 mins"
-  },
+  
   {
     "id": "drug-allergy-rash",
     "name": "Drug Allergy & Skin Rash Management",

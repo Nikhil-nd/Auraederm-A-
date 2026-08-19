@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Calendar, Award, ChevronLeft, ChevronRight, ArrowRight, CheckCircle2, MapPin } from 'lucide-react';
+import { Calendar, ChevronLeft, ChevronRight, ArrowRight, MapPin } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import hairScalpImage from '../assets/images/regenerated_image_1786512370228.png';
 // Import local clinical background & skincare treatment assets
@@ -100,16 +100,31 @@ export default function Hero({ onBookClick }: HeroProps) {
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-20 xl:px-24 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pt-24 pb-16 sm:pt-28 sm:pb-20 lg:pt-36 lg:pb-28 min-h-[90vh]">
         
         {/* Left Side Content Card (opaque white for pristine readability) */}
-        <div className="lg:col-span-7 flex justify-center lg:justify-start">
-          <div className="bg-white/95 backdrop-blur-md border border-white/85 shadow-2xl rounded-3xl p-6 sm:p-10 lg:p-12 max-w-2xl w-full flex flex-col">
-            {/* Premium Badge - Static & always visible */}
-            <div className="hidden sm:inline-flex self-start items-center gap-1.5 bg-[#8c1d5c]/10 text-[#8c1d5c] px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest mb-6">
-              <Award className="w-4 h-4 shrink-0" />
-              <span>Premium Dermatology</span>
+        <div className="lg:col-span-7 flex justify-center lg:justify-start relative">
+          {/* Mobile slide navigation arrows on both sides of the card */}
+          <button
+            onClick={handlePrev}
+            className="lg:hidden absolute -left-2 sm:-left-4 top-[calc(50%+16px)] -translate-y-1/2 mt-[15px] z-30 w-10 h-10 rounded-full border border-gray-200/90 bg-white/95 backdrop-blur-md flex items-center justify-center p-0 text-gray-700 hover:text-[#8c1d5c] active:scale-90 shadow-md transition-all cursor-pointer"
+            aria-label="Previous slide"
+          >
+            <ChevronLeft className="w-5 h-5 -translate-x-0.5" />
+          </button>
+          <button
+            onClick={handleNext}
+            className="lg:hidden absolute -right-2 sm:-right-4 top-[calc(50%+16px)] -translate-y-1/2 mt-[15px] z-30 w-10 h-10 rounded-full border border-gray-200/90 bg-white/95 backdrop-blur-md flex items-center justify-center p-0 text-gray-700 hover:text-[#8c1d5c] active:scale-90 shadow-md transition-all cursor-pointer"
+            aria-label="Next slide"
+          >
+            <ChevronRight className="w-5 h-5 translate-x-0.5" />
+          </button>
+
+          <div className="bg-white/95 backdrop-blur-md border border-white/85 shadow-2xl rounded-3xl p-6 sm:p-10 lg:p-12 max-w-2xl w-full flex flex-col relative">
+            {/* Clinic Motto Badge - Static & always visible */}
+            <div className="inline-flex self-start items-center bg-[#8c1d5c]/10 text-[#8c1d5c] border border-[#8c1d5c]/15 px-4 py-2 rounded-full text-xs sm:text-sm font-semibold tracking-wide mb-6">
+              <span>For every age, for every hue, for every YOU!</span>
             </div>
 
             {/* Animating Text Area with a stable min-height to prevent layout/height shift */}
-            <div className="min-h-[160px] sm:min-h-[180px] lg:min-h-[150px] flex flex-col justify-center relative overflow-hidden mb-6">
+            <div className="min-h-[140px] sm:min-h-[160px] lg:min-h-[140px] flex flex-col justify-center relative overflow-hidden mb-8">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={`text-${currentIndex}`}
@@ -131,19 +146,6 @@ export default function Hero({ onBookClick }: HeroProps) {
                 </motion.div>
               </AnimatePresence>
             </div>
-
-            {/* Sub-specializations Bullets - Static & always visible */}
-            <ul className="flex flex-wrap gap-4 sm:gap-6 mb-8">
-              <li className="flex items-center text-gray-700 text-xs sm:text-sm font-semibold">
-                <CheckCircle2 className="w-4 h-4 text-[#8c1d5c] mr-2 shrink-0" /> Symptoms
-              </li>
-              <li className="flex items-center text-gray-700 text-xs sm:text-sm font-semibold">
-                <CheckCircle2 className="w-4 h-4 text-[#8c1d5c] mr-2 shrink-0" /> Causes
-              </li>
-              <li className="flex items-center text-gray-700 text-xs sm:text-sm font-semibold">
-                <CheckCircle2 className="w-4 h-4 text-[#8c1d5c] mr-2 shrink-0" /> Treatments
-              </li>
-            </ul>
 
             {/* Visual CTAs - Static & always visible */}
             <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-4">
