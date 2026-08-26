@@ -20,7 +20,7 @@ export default function Hero({ onBookClick }: HeroProps) {
       condition: 'Acne & Acne Scars',
       description: 'Consultation & targeted medical therapy for clearing stubborn acne, blackheads, and reducing post-acne scarring.',
       bgImage: clinicHeroPath,
-      frontImage: 'https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&q=80&w=800'
+      frontImage: 'https://images.unsplash.com/photo-1785861485926-93a13556d656?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     },
     {
       condition: 'Aesthetic Skin Rejuvenation',

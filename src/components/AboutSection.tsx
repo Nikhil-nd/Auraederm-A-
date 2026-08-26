@@ -120,7 +120,7 @@ export default function AboutSection({ doctorPortraitPath }: AboutSectionProps) 
                     rel="noopener noreferrer"
                     className="text-xs text-[#8c1d5c] hover:underline font-medium font-sans inline-flex items-center gap-1"
                   >
-                    <span>Sector 23 Market, Gurugram, Haryana</span>
+                    {CLINIC_INFO.address}
                   </a>
                 </div>
               </div>
